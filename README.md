@@ -6,4 +6,5 @@ A personal blogging and portfolio site
 * Authentication
 * Pretty urls
 * DB security
-
+* Refactor 
+* Folders KIM
