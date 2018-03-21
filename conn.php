@@ -9,11 +9,11 @@
 		// $user="id59156_69_samson";
 		// $password="KN6ZEPuz";
 // Justins Connection
-        //		$datab="mydb";
-        //		$server="127.0.0.1";
-        //		$user="root";
-        //		$password="localhost";
-        //		$conn=mysqli_connect($server, $user, $password,$datab);
+//        		$datab="mydb";
+//        		$server="127.0.0.1";
+//        		$user="root";
+//        		$password="localhost";
+//        		$conn=mysqli_connect($server, $user, $password,$datab);
 
 // Kims connection
 		$datab="rol";
