@@ -88,12 +88,12 @@ and is wrapped around the whole page content, except for the footer in this exam
 			else
 			{
 				while($row = mysqli_fetch_assoc($result)) {
-		
+
 	echo "
-			 <img src='/w3images/bridge.jpg' alt='Norway' style='width:100%'>
+			 <div class='center-block'><img src='".$row["image"]."' alt='Norway' style='width:20vw' /></div>
       <div class='w3-container'>
 				<h3>".$row["item_name"]."</h3>
-      			<h5>Title description, <span class='w3-opacity'>April 2, 2014</span></h5>
+      			<h5>".$row["description"]." by ".$row["artist"]." <span class='w3-opacity'>".$row["postDate"]."</span></h5>
   			
   			<div>
       			<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sedtellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
@@ -166,11 +166,12 @@ and is wrapped around the whole page content, except for the footer in this exam
 
 <!-- END w3-content -->
 </div>
+
 <div class="pagination-style">
 		<nav aria-label="Page navigation">
   <ul class="pagination">
   	<?php
-  		if($curpage != $startpage){ 
+  		if($curpage != $startpage){
 	?>
     <li class="page-item">
       <a class="page-link" href="?page=<?php echo $previouspage ?>" tabindex="-1" aria-label="Previous">
@@ -179,11 +180,11 @@ and is wrapped around the whole page content, except for the footer in this exam
       </a>
     </li>
     <?php
-    	} 
+    	}
     ?>
 
     <?php
-    	if($curpage >= 2){ 
+    	if($curpage >= 2){
     ?>
     <li class="page-item"><a class="page-link" href="?page=<?php echo $previouspage ?>"><?php echo $previouspage ?></a></li>
     <?php
