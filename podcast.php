@@ -1,90 +1,69 @@
-<?php
-//KIM DID YOU CHANGE THE FILE SIZE 
- 		include "conn.php";
-		if(isset($_POST["submit"]))
-		{
-			$name=$_POST["name"];
-			$price=$_POST["price"];
-			$userName=$_SESSION["u_name"];
-			$user_id=$_SESSION["user_id"];
-			$day=date("Y-m-d");
-			$description=$_POST["description"];
-			$artist=$_POST["artist"];
-			$genre=$_POST["genre"];
-			$type=$_POST["type"];
-			$location="uploads/" . $_FILES["image"]["name"];
-	
-			if(isset($name) && isset($price))
-			{
-				$sql="INSERT INTO advert (user, user_id,item_name , description,artist, genre, type,price,image, postDate)
-				  VALUES ('$userName','$user_id','$name', '$description', '$artist', '$genre',  '$type', '$price', '$location' ,'$day')";
-				$res = mysqli_query($conn,$sql);
+<?php 
+  include "conn.php";
+  ?>
 
-			}
-		}
-	
-			
-	?>
+<!DOCTYPE html>
+<html>
+<title>Simone</title>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
+  <script type="text/javascript" src="jquery-3.1.0.js"></script>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="bootstrap/js/bootstrap.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+</head>
+<!-- 
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway"> -->
 
-<!DOCTYPE html> 
-<html> 
-	<head> 
-		<title>Roland Ink home</title>
-		<meta charset="UTF-8"> 
-		<meta name="author" content="Camille Samson">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css">
-		<link rel="stylesheet" type="text/css" href="style.css"> 
-		<link rel="icon" type="image/png" sizes="96x96" href="images/android-icon-192x192.png">
-		<script type="text/javascript" src="jquery-3.1.0.js"></script>
-		<script src="bootstrap/js/bootstrap.js"></script>
-		<script type="text/javascript" src="chat.js"></script>
-		<script type="text/javascript" src="script.js"></script>
-	
-	</head>
+<body class="w3-light-grey">
 
-	<body id="home-bod">
-	
-		<div class="container">
-		<div class="row">
-			<div class="col-md-10 col-md-offset-3 col-sml-4 col-xs-4">
-			<br />
-			<br />
+<!-- w3-content defines a container for fixed size centered content, 
+and is wrapped around the whole page content, except for the footer in this example -->
+<div class="w3-content" style="max-width:1400px">
+<style> 
+   h1{
+  font-family: 'Frutilla Script', serif; 
+  font-size: 140px;
+  color: #d8c308;
+  text-align: center;
+ } 
+ </style>
+<!-- Header -->
+<!-- Grid -->
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1>Simone</h1>
+</header>
+<div class="w3-row">
 
-			<div class="container" id="container-home">
-			<div class="row">
-				<div class="col-md-6 col-md-offset-2 col-sml-4 col-xs-4">
-					
-					<div id="head">
-						<h1> <a href="home.php"> Simone</a> </h1> 
-					</div>
-					<nav class="navbar navbar-inverse">
-				<ul class="nav navbar-nav">
-			    <li><a href="home.php">Home</a></li>
-				<li><a href="profile.php">Simone</a></li>
-				<li><a href="blog.php">Blog</a></li>
-				<li class="active"><a href="podcast.php">Podcasts</a></li>
-				</ul>
-			</nav>
-					<div id="container">
+<!-- Blog entries -->
+<div class="w3-col l8 s12">
+  <div class="navbar-fixed-top">
+    <div class="cbp-af-header">
+      <div class="w3-bar w3-black"> 
+        <a href="home.php" class="w3-bar-item w3-button w3-padding-16">Home</a>
+        <a href="profile.php" class="w3-bar-item w3-button w3-padding-16 ">Simone</a>
+        <a href="blog.php" class="w3-bar-item w3-button w3-padding-16">Blog</a>
+        <a href="podcast.php" class="w3-bar-item w3-button w3-padding-16">Podcasts</a>
+      </div>
+    </div>
+  </div>
 
-				<!-- <form method="post" action="search.php">
-					<label for="search">Search ad by title,user,artist,genre,,medium or description:</label>
-				    <input type="text" name="search" id="search" class='search_box'/>
-				    <input type="submit" value="Search" id="search2" class="btn btn-default" /><br />
-				</form> -->
-				</div>      
-				<div>
-				<ul id="results" class="update">
-				</ul>
-					
-				</div>
-			</div>
 
-		</div>
 
-		<?php
-			$perpage = 4;
+  <!-- Blog entry -->
+
+  <div class="w3-card-4 w3-margin w3-white">
+   
+    
+
+
+  <!-- Blog entry -->
+ 
+    <?php
+			$perpage = 3;
 			if(isset($_GET['page']) & !empty($_GET['page'])){
 				$curpage = $_GET['page'];
 			}else{
@@ -92,64 +71,106 @@
 			}
 			$start = ($curpage * $perpage) - $perpage;
 
-			$sql = "SELECT * FROM advert Order by ad_id desc";
+			$sql = "SELECT * FROM advert  Order by ad_id desc";
 			$result = mysqli_query($conn,$sql);
 			$totalres = mysqli_num_rows($result);
 			$endpage = ceil($totalres/$perpage);
 			$startpage = 1;
 			$nextpage = $curpage + 1;
 			$previouspage = $curpage - 1;
-			$sql = "SELECT * FROM advert  Order by ad_id desc  LIMIT $start, $perpage ";
+			$sql = "SELECT * FROM advert Order by ad_id desc  LIMIT $start, $perpage ";
 			$result = mysqli_query($conn,$sql);
+		
 			if(mysqli_num_rows($result)== 0)
 			{
 			    echo "0 results";
 			}
 			else
 			{
-				echo " <ul class='list-group'>";
 				while($row = mysqli_fetch_assoc($result)) {
-				echo "<li class='list-group-item it'>";
-        ?> 
-                 	<div class="container">
-                 	<button type="button" class="btn btn-default btn-sml messageseller <?php echo $row['user_id']; ?> " data-toggle="modal" data-target="#msgModal">Message seller </button>
-                 	<div id="msgModal" class="modal fade" role="dialog"> 
-                 		<div class="modal-content"> 
-                 			<div class="modal-header"> 
-                 				<button type="button" class="close" data-dismiss="modal"> &times;</button>
-                 					<h3 class="modal-title">Message Seller </h3>
-                 			</div>
-                 			<div class="modal-body"> 
-             					<div class="form-group">
-						<label for="send2">Send to:</label>
-						<input type="email" class="form-control" name="send" id="send2" placeholder="Send to"/>
-					 </div>
-					 <div class="form-group">  
-				        	<textarea id="chatMsg2" placeholder="Type your message."></textarea>
-						</div>
-					<div class="form-group">  
-						<button class="btn btn-default" id="submit2" name="submit2">Submit</button>
-					</div>
-				</div>
-				<div  class="modal-footer"> 
-					<button type="button" class="btn btn-default" data-dismiss="modal"> Close</button>
-				</div>
-			</div>
-		</div>
-		<?php
-		echo "<button type='button' id='view' class='btn btn-default view'> <a href='ad.php?id=" .$row['ad_id']. " '> View Ad</a></button> " ;
-		// echo "<button type='button' id='wish' class='btn btn-default view'> <a href='wishlist.php?id=" .$row['ad_id'].  "'> Add to wishlist</a></button> ";
+		
+	echo "
+			 <img src='/w3images/bridge.jpg' alt='Norway' style='width:100%'>
+      <div class='w3-container'>
+				<h3>".$row["item_name"]."</h3>
+      			<h5>Title description, <span class='w3-opacity'>April 2, 2014</span></h5>
+  			
+  			<div>
+      			<p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at. Phasellus sed ultricies mi non congue ullam corper. Praesent tincidunt sedtellus ut rutrum. Sed vitae justo condimentum, porta lectus vitae, ultricies congue gravida diam non fringilla.</p>
+       		</div>
+      		<div class='w3-row'>
+        		<div class='w3-col m8 s12'>
+         			<p><button class='w3-button w3-padding-large w3-white w3-border'><a href='respad.php?id=" .$row['ad_id']. " '>READ MORE »</a></button></p>
+        		</div>
+        	</div>
+        </div>    
+          <hr>	
+  ";
+  
+    	}}
+						
+		?>
+<!-- END BLOG ENTRIES -->
 
-			echo "<h3>".$row["item_name"]."</h3><br />";
-			echo "Posted by: <a href='user.php?id=" .$row['user_id']. "'> ".$row['user']."</a>";
-			echo "<br /> Post date:".$row["postDate"] ." <br />Artist: ".$row["artist"] ."<br /><img class='img' src='" .$row["image"]. " '>" ;
-			echo "  </li>";
-			}
+</div>
+  </div>
+<!-- Introduction menu -->
+<div class="w3-col l4">
+  <!-- About Card -->
+  <div class="w3-card w3-margin w3-margin-top">
+  <img src="/w3images/avatar_g.jpg" style="width:100%">
+    <div class="w3-container w3-white">
+      <h4><b>My Name</b></h4>
+      <p>Just me, myself and I, exploring the universe of uknownment. I have a heart of love and a interest of lorem ipsum and mauris neque quam blog. I want to share my world with you.</p>
+    </div>
+  </div><hr>
+  
+  <!-- Posts -->
+  <div class="w3-card w3-margin">
+    <div class="w3-container w3-padding">
+      <h4>Popular Posts</h4>
+    </div>
+    <?php         
+        $sql = "SELECT * FROM advert Order by views desc LIMIT 4 ";
+        $result = mysqli_query($conn,$sql);
+    
+        if(mysqli_num_rows($result)== 0)
+        {
+            echo "0 results";
+        }
+        else
+        {
+          while($row = mysqli_fetch_assoc($result)) {
 
-			
-		echo  "</ul>";
-		}
-		?> 
+    
+    ?> 
+    
+    <ul class="w3-ul w3-hoverable w3-white">
+      <li class="w3-padding-16">
+        <img src="/w3images/workshop.jpg" alt="Image" class="w3-left w3-margin-right" style="width:50px">
+        <span class="w3-large"><?php echo $row['item_name'] ?></span><br>
+        <span>Sed mattis nunc</span>
+      </li>
+    </ul>
+    <?php 
+      }}
+       mysqli_close($conn); 
+    ?>
+  </div>
+  <hr> 
+ 
+  <!-- Labels / tags -->
+  
+  
+<!-- END Introduction Menu -->
+</div>
+
+<!-- END GRID -->
+</div><br>
+
+<!-- END w3-content -->
+</div>
+<div class="pagination-style">
 		<nav aria-label="Page navigation">
   <ul class="pagination">
   	<?php
@@ -184,14 +205,14 @@
     <?php } ?>
   </ul>
 </nav>
-		<?php
-		mysqli_close($conn);					
-		?>
-	</div>
-	</div>
-	</div>
-	</div>
-	</div>
-		
-	</body> 
+</div>
+
+<!-- Footer -->
+<footer class="w3-container w3-dark-grey w3-padding-32 w3-margin-top">
+  <button class="w3-button w3-black w3-disabled w3-padding-large w3-margin-bottom">Previous</button>
+  <button class="w3-button w3-black w3-padding-large w3-margin-bottom">Next »</button>
+  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+</footer>
+
+</body>
 </html>
