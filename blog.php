@@ -177,7 +177,7 @@ and is wrapped around the whole page content, except for the footer in this exam
   		if($curpage != $startpage){ 
 	?>
     <li class="page-item">
-      <a class="page-link" href="?page=<?php echo $startpage ?>" tabindex="-1" aria-label="Previous">
+      <a class="page-link" href="?page=<?php echo $previouspage ?>" tabindex="-1" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
         <span class="sr-only">First</span>
       </a>
@@ -197,7 +197,7 @@ and is wrapped around the whole page content, except for the footer in this exam
     <?php if($curpage != $endpage){ ?>
     <li class="page-item"><a class="page-link" href="?page=<?php echo $nextpage ?>"><?php echo $nextpage ?></a></li>
     <li class="page-item">
-      <a class="page-link" href="?page=<?php echo $endpage ?>" aria-label="Next">
+      <a class="page-link" href="?page=<?php echo $nextpage ?>" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
         <span class="sr-only">Last</span>
       </a>
